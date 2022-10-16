@@ -11,10 +11,13 @@ public class Machine {
     }
 
     public String toString() {
-        String temp = "The machine has the following items inside:\n";
+        String temp = "\tThe machine has the following items inside:\n";
 
-        for (int i = 0; i < items[i].length; i++) {
-            temp += items[i].toString() + "\n";
+        for (int i = 0; i < items.length; i++) {
+            temp += "\n\tOn row " + i + ":\n";
+            for (int j = 0; j < items[i].length; j++) {
+                temp += "\t\t" + items[i][j].toString() + "\n";
+            }
         }
         return temp;
     }
