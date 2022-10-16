@@ -11,7 +11,7 @@ public class Machine {
     }
 
     public String toString() {
-        String temp = "";
+        String temp = "\t****************************************************\n";
 
         for (int i = 0; i < items.length; i++) {
             temp += "\t";
