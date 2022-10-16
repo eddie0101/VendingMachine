@@ -14,7 +14,7 @@ public class Machine {
         String temp = "\tThe machine has the following items inside:\n";
 
         for (int i = 0; i < items.length; i++) {
-            temp += "\n\tOn row " + i + ":\n";
+            temp += "\n\tOn row " + (i + 1) + ":\n";
             for (int j = 0; j < items[i].length; j++) {
                 temp += "\t\t" + items[i][j].toString() + "\n";
             }
@@ -23,6 +23,10 @@ public class Machine {
     }
 
     public Item getItem(int row, int spot) {
-        return items[row - 1][spot - 1];
+        return new Item(items[row - 1][spot - 1]);
+    }
+
+    public void setItem(Item item, int row, int spot) {
+        this.items[row - 1][spot - 1] = new Item(item);
     }
 }
