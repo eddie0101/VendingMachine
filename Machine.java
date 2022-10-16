@@ -11,14 +11,16 @@ public class Machine {
     }
 
     public String toString() {
-        String temp = "\tThe machine has the following items inside:\n";
+        String temp = "";
 
         for (int i = 0; i < items.length; i++) {
-            temp += "\n\tOn row " + (i + 1) + ":\n";
+            temp += "\t";
             for (int j = 0; j < items[i].length; j++) {
-                temp += "\t\t" + items[i][j].toString() + "\n";
+                temp += items[i][j].toString() + "   ";
             }
+            temp += "\n";
         }
+        temp += "\t****************************************************";
         return temp;
     }
 
@@ -29,4 +31,15 @@ public class Machine {
     public void setItem(Item item, int row, int spot) {
         this.items[row - 1][spot - 1] = new Item(item);
     }
+
+    public boolean dispense(int row, int spot) {
+        if (items[row - 1][spot - 1].getQuantity() > 0) {
+            items[row - 1][spot - 1].setQuantity(items[row - 1][spot - 1].getQuantity() - 1);
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
 }
