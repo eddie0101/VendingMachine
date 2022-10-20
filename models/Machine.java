@@ -1,3 +1,5 @@
+package models;
+
 public class Machine {
     private Item[][] items;
 
