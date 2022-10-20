@@ -1,5 +1,8 @@
 import java.util.Scanner;
 
+import models.Item;
+import models.Machine;
+
 public class Main {
     public static void main(String[] args) {
 
@@ -22,25 +25,31 @@ public class Main {
 
         while (true) {
             System.out.print("Pick a row: ");
-            int row = scan.nextInt();
+            int row = scan.hasNextInt() ? scan.nextInt() : 404;
+            scan.nextLine();
             System.out.print("Pick a spot: ");
-            int spot = scan.nextInt();
-    
-            if (machine.dispense(row, spot) == true) {
-                System.out.print("Enjoy your drink! Press 1 to get another: ");
-            }
-            else {
-                System.out.print("Sorry, we're out of this item. Press 1 to purchase another: ");
-            }
-            int input = scan.nextInt();
-            if (input == 1) {
-                System.out.println(machine);
-            }
-            else {
-                System.exit(0);
+            int spot = scan.hasNextInt() ? scan.nextInt() : 404;
+            scan.nextLine();
+
+            if (row == 404 || spot == 404) {
+                System.out.println("INVALID INPUT");
+                continue;
+            } else if (row < 1 || row > machine.getItemLength() || spot < 1 || spot > machine.getItemRowLength()) {
+                System.out.println("INPUT OUT OF RANGE");
+                continue;
+            } else if (machine.getItem(row, spot).getQuantity() == 0) {
+                System.out.println("EMPTY SLOT");
+                continue;
             }
 
+            machine.dispense(row, spot);
+            System.out.println("\n" + machine);
+            System.out.print("Enjoy your drink! Press 1 to purchase another: ");
+            if (!scan.nextLine().equals("1")) {
+                break;
+            }
         }
+        scan.close();
 
     }
 
