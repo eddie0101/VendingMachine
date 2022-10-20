@@ -26,6 +26,14 @@ public class Machine {
         return temp;
     }
 
+    public int getItemLength() {
+        return items.length;
+    }
+
+    public int getItemRowLength() {
+        return items[0].length;
+    }
+
     public Item getItem(int row, int spot) {
         return new Item(items[row - 1][spot - 1]);
     }
@@ -34,14 +42,11 @@ public class Machine {
         this.items[row - 1][spot - 1] = new Item(item);
     }
 
-    public boolean dispense(int row, int spot) {
-        if (items[row - 1][spot - 1].getQuantity() > 0) {
-            items[row - 1][spot - 1].setQuantity(items[row - 1][spot - 1].getQuantity() - 1);
-            return true;
+    public void dispense(int row, int spot) {
+        if (items[row - 1][spot - 1].getQuantity() == 0) {
+            throw new IllegalArgumentException("The item at row " + row + " and spot " + spot + " has quantity zero");
         }
-        else {
-            return false;
-        }
+        items[row - 1][spot - 1].setQuantity(items[row - 1][spot - 1].getQuantity() - 1);
     }
 
 }
